@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Form from "../src/components/Wrapper";
+import Form from "./Form";
 
 function App() {
   const [books, setBooks] = useState([
@@ -44,13 +44,17 @@ function App() {
     });
   };
 
+  const handleSort = () => {
+    setBooks([...books].sort((a, b) => b.likes - a.likes));
+  };
+
   return (
     <>
       <header>
         <h1>Booker</h1>
       </header>
 
-      <Form onSubmit={addBook} />
+      <Form onSubmit={addBook} onSort={handleSort} />
 
       {books.map((book) => (
         <pre key={book.id}>
